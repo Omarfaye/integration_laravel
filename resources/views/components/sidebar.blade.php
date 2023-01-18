@@ -24,12 +24,12 @@
                 </a>
                 <ul>
                     <li>
-                        <a href="#void">
+                        <a href="{{route('users.index')  }}">
                             <span>User</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#void">
+                        <a href="{{route('roles.index')}}">
                             <span>Role and permission</span>
                         </a>
                     </li>
@@ -39,3 +39,4 @@
 
     </div>
 </aside>
+
