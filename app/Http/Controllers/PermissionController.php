@@ -2,39 +2,34 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Lang;
+use RealRashid\SweetAlert\Facades\Alert;
+use Spatie\Permission\Models\Permission;
 class PermissionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function index(): Factory|View|Application
     {
-        //
+        $permissions = Permission::all();
+        return view('pages.configuration.permission.index', compact('permissions'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function create(): Factory|View|Application
     {
-        //
+        return view('pages.configuration.permission.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
-        //
+        $validated = $request->validate(['name' => 'required']);
+        Permission::create($validated);
+        Alert::success('Permission Add successfully!');
+        return back()->with('toast_success', Lang::get('permission.create_message'));
+
     }
 
     /**
@@ -48,37 +43,23 @@ class PermissionController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function edit(Permission $permission): Factory|View|Application
     {
-        //
+        return view('pages.configuration.permission.edit', compact('permission'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update(Request $request, Permission $permission): RedirectResponse
     {
-        //
+        $validated = $request->validate(['name' => 'required']);
+        $permission->update($validated);
+        Alert::success('Permission Updating!');
+        return back()->with('toast_success', Lang::get('permission.update_message'));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function destroy(Permission $permission): RedirectResponse
     {
-        //
+        $permission->delete();
+        Alert::success('Permission Deleting!');
+        return back()->with('toast_success', Lang::get('permission.delete_message'));
     }
 }

@@ -53,6 +53,7 @@ Array.from(document.getElementsByClassName('--jb-modal')).forEach(el => {
   })
 });
 
+
 /* Modal: close */
 
 Array.from(document.getElementsByClassName('--jb-modal-close')).forEach(el => {

@@ -9,6 +9,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Lang;
+use RealRashid\SweetAlert\Facades\Alert;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
@@ -30,7 +31,7 @@ class RoleController extends Controller
     {
         $validated = $request->validate(['name' => ['required', 'min:3']]);
         Role::create($validated);
-
+        Alert::success('Role Add successfully!');
         return back()->with('toast_success', Lang::get('role.create_message'));
     }
 
@@ -43,14 +44,14 @@ class RoleController extends Controller
     {
         $validated = $request->validate(['name' => ['required', 'min:3']]);
         $role->update($validated);
-
+        Alert::success('Role Updating!');
         return back()->with('toast_success', Lang::get('role.update_message'));
     }
 
     public function destroy(Role $role): RedirectResponse
     {
         $role->delete();
-
+        Alert::success('Role Deleting!');
         return back()->with('toast_success', Lang::get('role.delete_message'));
     }
 

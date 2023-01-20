@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class RegisteredUserController extends Controller
 {
@@ -41,6 +42,8 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
+
+        Alert::success('Registred Successfully!', 'Welcome to your dashboard.');
 
         event(new Registered($user));
 

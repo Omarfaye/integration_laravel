@@ -26,7 +26,8 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
     return view('home');
-})->middleware(['auth', 'role:admin'])->name('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+/*})->middleware(['auth', 'role:admin'])->name('dashboard');*/
 
 /*Route::get('/home', function () {
     return view('home');
@@ -34,9 +35,20 @@ Route::get('/dashboard', function () {
 /*})->middleware(['auth', 'verified'])->name('home');*/
 
 Route::middleware('auth')->group(function () {
+
     Route::resource('/roles', RoleController::class);
+    Route::post('/roles/{role}/permissions', [RoleController::class, 'givePermission'])->name('roles.permissions');
+    Route::delete('/roles/{role}/permissions/{permission}', [RoleController::class, 'revokePermission'])->name('roles.permissions.revoke');
+    Route::resource('/permissions', PermissionController::class);
+    Route::post('/permissions/{permission}/roles', [PermissionController::class, 'assignRole'])->name('permissions.roles');
+    Route::delete('/permissions/{permission}/roles/{role}', [PermissionController::class, 'removeRole'])->name('permissions.roles.remove');
     Route::resource('users', UserController::class);
-    Route::resource('permissions', PermissionController::class);
+    Route::post('/users/{user}/roles', [UserController::class, 'assignRole'])->name('users.roles');
+    Route::delete('/users/{user}/roles/{role}', [UserController::class, 'removeRole'])->name('users.roles.remove');
+    Route::post('/users/{user}/permissions', [UserController::class, 'givePermission'])->name('users.permissions');
+
+    Route::delete('/users/{user}/permissions/{permission}', [UserController::class, 'revokePermission'])->name('users.permissions.revoke');
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

@@ -1,51 +1,64 @@
-<x-main>
-    <div class="row">
-        <div class="col-12 mb-4 order-0">
-            <div class="card">
-                <div class="d-flex align-items-end row">
-                    <div class="col-sm-12">
-                        <div class="card-body table-responsive">
-                           <div class="col-12 d-flex justify-content-between">
-                               <h5 class="card-title text-primary">{{ __('user.create_user') }}</h5>
-                           </div>
-                           <form method="POST" action="{{ route('users.update', $user->id) }}">
-                            @csrf
-                            @method('PUT')
-                            <div class="mb-3">
-                                <label  class="form-label">name</label>
-                                {!! Form::text('name',$user->name, ['placeholder'=>'name',  'class'=>'form-control']) !!}
-                                @error('name')
-                                <div  class="form-text"> {{ $message }} </div>
-                                @enderror
-                            </div>
-                            <div class="mb-3">
-                                <label  class="form-label">email</label>
-                                {!! Form::email('email',$user->email, ['placeholder'=>'email' ,  'class'=>'form-control']) !!}
-                                @error('email')
-                                <div  class="form-text"> {{ $message }} </div>
-                                @enderror
-                            </div>
-                            <div class="mb-3">
-                                <label  class="form-label">roles</label>
-                                {!! Form::select('roles[]', $roles,$userRole, array('class' => 'form-control','multiple')) !!}
-                                @error('roles')
-                                <div  class="form-text"> {{ $message }} </div>
-                                @enderror
-                            </div>
-                            <div class="mb-3">
-                                <label  class="form-label">permission</label>
-                                {!! Form::select('permissions[]', $permissions,$userPermission, array('class' => 'form-control','multiple')) !!}
-                                @error('permissions')
-                                <div  class="form-text"> {{ $message }} </div>
-                                @enderror
-                            </div>
-
-                            <button type="submit" class="btn btn-primary">{{ __('user.update') }}</button>
-                        </form>
+<div class="card mb-6">
+    <header class="card-header">
+        <p class="card-header-title">
+            <span class="icon"><i class="mdi mdi-ballot"></i></span>
+            Forms
+        </p>
+    </header>
+    <div class="card-content">
+        <form method="post" action="{{ route('users.update', $user->id) }}" >
+            @csrf
+            @method('PUT')
+            <div class="field">
+                <label class="label">Name</label>
+                <div class="field-body">
+                    <div class="field">
+                        <div class="control icons-left">
+                            <input class="input" type="text" placeholder="Name" name="name" value="{{$user->name}}">
+                            <span class="icon left"><i class="mdi mdi-account"></i></span>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label">Email</label>
+                        <div class="control icons-left icons-right">
+                            <input class="input" type="email" placeholder="Email" value="{{$user->email}}" name="email">
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+
+            <div class="field">
+
+                <label class="label">Permission</label>
+                <div class="control icons-left icons-right">
+                    {!! Form::select('permissions[]',  $permissions,$userPermission, array('class' => 'input','multiple')) !!}
+                </div>
+            </div>
+
+
+
+            <div class="field">
+
+                <label class="label">Role</label>
+                <div class="control icons-left icons-right">
+                    {!! Form::select('roles[]',  $roles,$userRole, array('class' => 'input','multiple')) !!}
+                </div>
+            </div>
+
+            <div class="field grouped">
+                <div class="control">
+                    <button class="button --jb-modal-close">Cancel</button>
+                </div>
+                <div class="control">
+                    <button type="submit" class="button green">
+                        Submit
+                    </button>
+                </div>
+
+            </div>
+        </form>
     </div>
-</x-main>
+</div>
+
+
+

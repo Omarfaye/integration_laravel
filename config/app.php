@@ -183,6 +183,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         \Atpro\Translator\AtproServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
+        RealRashid\SweetAlert\SweetAlertServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -196,6 +197,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class,
 
     ],
 
@@ -212,6 +214,9 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
+        'Form' => Collective\Html\FormFacade::class,
+        'Html' => Collective\Html\HtmlFacade::class,
+        'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
     ])->toArray(),
 
 ];
