@@ -80,14 +80,19 @@
                                         Detail<span class="icon"><i class="mdi mdi-eye"></i></span>
                                     </button>
                                     @if ($user->id !== auth()->user()->id )
-                                    <form action="{{route('users.destroy', $user->id)}}" method="POST">
+                                        <button class="button small red --jb-modal"
+                                                type="button"  onclick='showModel("users/{{$user->id }}")'>
+                                            Delete<span class="icon"><i class="mdi mdi-trash-can"></i></span>
+                                        </button>
+
+                                   {{-- <form action="{{route('users.destroy', $user->id)}}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button class="button small red --jb-modal"
                                                 type="submit">
                                             Delete<span class="icon"><i class="mdi mdi-trash-can"></i></span>
                                         </button>
-                                    </form>
+                                    </form>--}}
                                     @endif
                                 </div>
                             </td>
@@ -149,6 +154,10 @@
         </section>
 
     </div>
+    </body>
+    </html>
+    <x-delete-modal  message="{{ __('Are you sure you want to delete this record') }}"
+                     cancel="{{ __('Cancel') }}" confirm="{{ __('Delete') }}" id="deleteConfirmationModel"></x-delete-modal>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 

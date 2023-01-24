@@ -29,7 +29,7 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
-        Alert::success('Authenticated Successfully!', 'Welcome to your dashboard.');
+     /*   Alert::success('Authenticated Successfully!', 'Welcome to your dashboard.');*/
 
         return redirect()->intended(RouteServiceProvider::HOME);
     }

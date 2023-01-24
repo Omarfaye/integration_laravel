@@ -120,7 +120,7 @@
                     <header class="card-header">
                         <p class="card-header-title">
                             <span class="icon"><i class="mdi mdi-account"></i></span>
-                            Profile
+                            Authorization
                         </p>
                     </header>
                     <div class="card-content">
@@ -222,7 +222,6 @@
                     </div>
                     <div class="modal-footer"><br/>
                         <button class="button green --jb-modal-close">Update</button>
-                        <button type="submit" class="btn btn-primary">Close</button>
                     </div>
                 </form>
             </section>

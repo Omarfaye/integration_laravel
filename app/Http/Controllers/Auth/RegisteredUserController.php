@@ -43,7 +43,7 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        Alert::success('Registred Successfully!', 'Welcome to your dashboard.');
+      /*  Alert::success('Registred Successfully!', 'Welcome to your dashboard.');*/
 
         event(new Registered($user));
 
