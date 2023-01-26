@@ -113,9 +113,11 @@
                     <header class="modal-card-head">
                         <p class="modal-card-title">Sample modal</p>
                     </header>
+
                     <section class="modal-card-body" id="updateForm">
 
                     </section>
+
                 </div>
             </div>
             <!--Modal Update-->
@@ -162,7 +164,7 @@
 
 
     <script>
-        <!--Modification Users-->
+        <!--Modification-Users-->
         function modififUsers(id) {
              $('#updateForm').load(`/users/${id}/edit`);
              document.getElementById('sample-modal').classList.add('active');

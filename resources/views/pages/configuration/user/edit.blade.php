@@ -47,18 +47,13 @@
 
             <div class="field grouped">
                 <div class="control">
-                    <button class="button --jb-modal-close">Cancel</button>
-                </div>
-                <div class="control">
-                    <button type="submit" class="button green">
+                    <button type="submit" class="button blue">
                         Submit
                     </button>
                 </div>
-
             </div>
+
         </form>
     </div>
 </div>
-
-
 
